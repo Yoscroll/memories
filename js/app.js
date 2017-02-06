@@ -15,7 +15,7 @@ function setup(){
 	for (var i = 0; i < 8; i++) {
 		document.getElementById(ids[i]).style.display="inline";
 		var randomNumber =  Math.floor(Math.random() * (pic.length));
-		document.getElementsByClassName("back")[i]style.backgroundImage = "url('./assets/"+pic[randomNumber]+".png')";
+		document.getElementsByClassName("back")[i].style.backgroundImage = "url('./assets/"+pic[randomNumber]+".png')";
 		pair.push([ids[i],pic[randomNumber]]);
 		pic.splice(randomNumber, 1);
 	}
@@ -52,8 +52,8 @@ function finish(){
 function press(idName) {
 	if(started==true){
 		if (timeStarted==false&&count==30){
-				timeStarted=true;
-				var time =setInterval(clock, 1000);
+			timeStarted=true;
+			var time =setInterval(clock, 1000);
 		}
 		var box = document.getElementById(idName);
 		box.style.transform = 'rotateY(180deg)';

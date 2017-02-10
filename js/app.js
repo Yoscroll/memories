@@ -28,10 +28,15 @@ function press(idName) {
 			second.style.transform = 'rotateY(0deg)';
 			if(pair[x][1]==pair[y][1])
 			{
-				first.parentNode.removeChild(first);
-				second.parentNode.removeChild(second);
+				first.style.display="none";
+				second.style.display="none";
 				points += 1;
 				document.getElementById("points").innerHTML="Correct: "+points;
+				if(points==4){
+					var idfinish = document.getElementById("finish");
+						idfinish.innerHTML="WOW YOU'RE SO GOOD WOW<br>Wanna time your self?<br>Check out my brached repo";
+						idfinish.style.display='inline';
+					}
 			}
 			turned = [];
 		}, 400);

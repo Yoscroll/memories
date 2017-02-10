@@ -1,20 +1,22 @@
-var turned = [];
-var ids = ["one","two","three","four","five","six","seven","eight"];
-var pair = [];
-var points = 0;
-var timeStarted = false;
+var turned = [];//what is currently turned
+var ids = ["one","two","three","four","five","six","seven","eight"];//all ids of individual cards
+var pair = [];//it contains card and what picture it has
+var points = 0;//total points
+var timeStarted = false;//if the timer started or not
 var count = 30;
-
-var idTime =document.getElementById("time");
-var idPoint=document.getElementById("points");
+var started = false;
+//shortcuts
+var idTime = document.getElementById("time");
+var idPoint= document.getElementById("points");
 var idfinish = document.getElementById("finish");
 var idStart = document.getElementById("start");
+//sets new random pictures to the cards
 function setup(){
 	pair=[];
-	var pic=[1,1,2,2,3,3,4,4];
-	for (var i = 0; i < 8; i++) {
-		document.getElementById(ids[i]).style.display="inline";
-		var randomNumber =  Math.floor(Math.random() * (pic.length));
+	var pic=[1,1,2,2,3,3,4,4];//the name of each pic x2
+	for (var i = 0; i < 8; i++) {//loops 8x for each card
+		document.getElementById(ids[i]).style.display="inline";//makes cards visible
+		var randomNumber =  Math.floor(Math.random() * (pic.length));//asssigns random number
 		document.getElementsByClassName("back")[i].style.backgroundImage = "url('./assets/"+pic[randomNumber]+".png')";
 		pair.push([ids[i],pic[randomNumber]]);
 		pic.splice(randomNumber, 1);
@@ -22,8 +24,16 @@ function setup(){
 }
 setup();
 function clock(){
-	if(points==4&&count>0||count==0){
+	if(points==4&&count>0){
 		clearInterval(clock);
+	}
+	else if(count==0&&points<4){
+		clearInterval(clock);
+		for (var i = 0; i < 8; i++) {
+			document.getElementsByClassName("card")[i].style.display="none";
+		}
+		idfinish.innerHTML="WOWOW so bad<br>You're score: "+points+"<br><button id='finishBut' onclick='finish()''>AGAIN!</button>";
+		idfinish.style.display='inline';
 	}
 	else{
 		count-=1;
@@ -48,6 +58,7 @@ function finish(){
 	idPoint.innerHTML="Correct: 0";
 	points=0;
 	count=30;
+	//resets all variables
 }
 function press(idName) {
 	if(started==true){
